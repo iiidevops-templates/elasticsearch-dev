@@ -22,3 +22,6 @@ spec:
         ports:
         - containerPort: 9200
         - containerPort: 9300 #Java API port
+        env:
+        - name: "discovery.type"
+          value: "single-node"
