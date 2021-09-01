@@ -23,14 +23,14 @@ spec:
         - containerPort:9200
         - containerPort:9300 #Java API port
         env:
-          node.name: Master
-          bootstrap.memory_lock: true
-          http.cors.allow-origin: *
-          http.cors.enabled: true
-          path.data: /es_data
-          indices.recovery.max_bytes_per_sec: 0
-          refresh_interval: 30s
-          cluster.initial_master_nodes: Master
+          "node.name": "Master"
+          "bootstrap.memory_lock": "true"
+          "http.cors.allow-origin": "*"
+          "http.cors.enabled": "true"
+          "path.data": "/es_data"
+          "indices.recovery.max_bytes_per_sec": "0"
+          "refresh_interval": "30s"
+          "cluster.initial_master_nodes": "Master"
         envFrom:
           - configMapRef:
               name: "${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env"
