@@ -12,7 +12,7 @@ spec:
     metadata:
       labels:
         app: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-es
-    annotations:
+      annotations:
         iiidevops.org/type: es-server
     spec:
       imagePullSecrets:
