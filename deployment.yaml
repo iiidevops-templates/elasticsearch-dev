@@ -23,11 +23,19 @@ spec:
         - containerPort: 9200
         - containerPort: 9300 #Java API port
         env:
-          node.name: "Master"
-          bootstrap.memory_lock: "true"
-          http.cors.allow-origin: "*"
-          http.cors.enabled: "true"
-          path.data: "/es_data"
-          indices.recovery.max_bytes_per_sec: "0"
-          refresh_interval: "30s"
-          cluster.initial_master_nodes: "Master"
+        - name: node.name
+          value: Master
+        - name: bootstrap.memory_lock
+          value: true
+        - name: http.cors.allow-origin
+          value: "*"
+        - name: http.cors.enabled
+          value: true
+        - name: path.data
+          value: "/es_data"
+        - name: indices.recovery.max_bytes_per_sec
+          value: "0"
+        - name: refresh_interval
+          value: "30s"
+        - name: cluster.initial_master_nodes
+          value: "Master"
