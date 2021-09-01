@@ -10,9 +10,9 @@ spec:
   selector:
     app: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-db-svc
   ports:
-    - name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-es9200
+    - name: es-tcp-9200
       protocol: TCP
       port: 9200
-    - name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-es9300
+    - name: es-tcp-9300
       protocol: TCP
       port: 9300
