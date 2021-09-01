@@ -26,7 +26,9 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9200
+          name:${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-es9200
         - containerPort: 9300 #Java API port
+          name:${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-es9300
         env:
         - name: "discovery.type"
           value: "single-node"
