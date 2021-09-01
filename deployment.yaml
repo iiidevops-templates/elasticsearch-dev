@@ -24,13 +24,13 @@ spec:
         - containerPort: 9300 #Java API port
         env:
         - name: node.name
-          value: Master
+          value: "Master"
         - name: bootstrap.memory_lock
-          value: true
+          value: "true"
         - name: http.cors.allow-origin
           value: "*"
         - name: http.cors.enabled
-          value: true
+          value: "true"
         - name: path.data
           value: "/es_data"
         - name: indices.recovery.max_bytes_per_sec
