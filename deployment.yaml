@@ -25,3 +25,6 @@ spec:
         env:
         - name: "discovery.type"
           value: "single-node"
+        envFrom:
+          - configMapRef:
+              name: "${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env"
