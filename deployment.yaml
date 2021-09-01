@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-db
+  name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-es
   namespace: ${CICD_GIT_REPO_NAME}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-db
+      app: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-es
   template:
     metadata:
       labels:
-        app: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-db
+        app: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-es
     spec:
       imagePullSecrets:
       - name: harbor-local    
       containers:
-      - name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-db
+      - name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-es
         image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.6.0
         imagePullPolicy: IfNotPresent
         ports:
-        - containerPort:9200
-        - containerPort:9300 #Java API port
+        - containerPort: 9200
+        - containerPort: 9300 #Java API port
         env:
           node.name: "Master"
           bootstrap.memory_lock: "true"
@@ -31,6 +31,3 @@ spec:
           indices.recovery.max_bytes_per_sec: "0"
           refresh_interval: "30s"
           cluster.initial_master_nodes: "Master"
-        envFrom:
-          - configMapRef:
-              name: "${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env"
