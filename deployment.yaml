@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-es
+  name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-db-dpy
   namespace: ${CICD_GIT_REPO_NAME}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-es
+      app: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-db
   template:
     metadata:
       labels:
-        app: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-es
+        app: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-db
     spec:
       imagePullSecrets:
       - name: harbor-local    
       containers:
-      - name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-es
+      - name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-db-dpy
         image: elasticsearch:7.6.0
         imagePullPolicy: IfNotPresent
         ports:
