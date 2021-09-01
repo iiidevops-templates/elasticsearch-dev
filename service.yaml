@@ -5,10 +5,15 @@ metadata:
   namespace: ${CICD_GIT_REPO_NAME}
   labels: 
     app: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-db-svc
+  annotations:
+    iiidevops.org/project_name: ${CICD_GIT_REPO_NAME}
+    iiidevops.org/branch: ${CICD_GIT_BRANCH}
+    iiidevops.org/commit_id: ${CICD_GIT_COMMIT}
+    iiidevops.org/type: db-server
 spec:
   type: NodePort
   selector:
-    app: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-db-svc
+    app: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-es
   ports:
     - name: es-tcp-9200
       protocol: TCP
