@@ -1,19 +1,8 @@
 stages:
-- name: Deploy--DB(MS-SQL)
+- name: Deploy--ElasticSearch
   steps:
-  - applyAppConfig:
-      answers:
-        db.gui: true
-        auth.saPassword: templatePassword123
-        image.tag: 2019-CU10-ubuntu-20.04
-        git.url: ${CICD_GIT_URL}
-        git.repoName: ${CICD_GIT_REPO_NAME}
-        git.branch: ${CICD_GIT_BRANCH}
-        git.commitID: ${CICD_GIT_COMMIT}
-      catalogTemplate: cattle-global-data:iii-dev-charts3-mssql-server
-      name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-db
-      targetNamespace: ${CICD_GIT_REPO_NAME}
-      version: 0.1.0
+  - applyYamlConfig:
+      path: ./deployment.yaml
   when:
     branch:
       include:

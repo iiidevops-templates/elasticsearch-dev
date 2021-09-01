@@ -1,12 +1,12 @@
 {
-  "name": "Microsoft SQL Server Linux 2019 (Dev)",
-  "description": "Microsoft SQL Server Linux 2019 密碼一定要大小寫英數!!! <a class='el-link el-link--primary' href='https://github.com/iiidevops-templates/mssql-server-dev/blob/master/README.md' target='_blank'>MS SQL Server 部屬注意事項</a>",
+  "name": "Elasticsearch (Dev)",
+  "description": "Elasticsearch 7.6 <a class='el-link el-link--primary' href='https://github.com/iiidevops-templates/elasticsearch-dev/blob/master/README.md' target='_blank'> 部署注意事項</a>",
   "arguments": [
     {
-      "key": "auth.saPassword",
-      "display": "DB Password for sa",
-      "default_value": "templatePassword123",
-      "input_type": "password"
+      "key": "node.name",
+      "display": "Node Name",
+      "default_value": "Master",
+      "input_type": "text"
     }
   ]
 }
