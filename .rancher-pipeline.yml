@@ -68,7 +68,8 @@ stages:
       PLUGIN_MTU: 1440
     runScriptConfig:
       image: elasticdump/elasticsearch-dump
-      shellScript: ls; ls ./data; pwd; elasticdump --input "csv://data/imports.csv" --output=http://10.20.0.94:32306/my_index --type=data
+      # Ref - https://github.com/elasticsearch-dump/elasticsearch-dump
+      shellScript: ls; ls ./data; pwd; elasticdump --input "csv://data/imports.csv" --output=http://10.20.0.94:32306/my_index --type=data --csvDelimiter ";"
   when:
     branch:
       include:
