@@ -10,6 +10,8 @@ spec:
       app: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-es
   template:
     metadata:
+      labels:
+        app: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-es
       annotations:
         iiidevops.org/project_name: ${CICD_GIT_REPO_NAME}
         iiidevops.org/branch: ${CICD_GIT_BRANCH}
@@ -33,9 +35,6 @@ spec:
         envFrom:
           - configMapRef:
               name: "${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env"
-        metadata:
-          labels:
-            app: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-es
       - name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-eshead
         image: dtagdevsec/head:2006
         imagePullPolicy: Always
@@ -45,6 +44,3 @@ spec:
         envFrom:
           - configMapRef:
               name: "${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env"
-        metadata:
-          labels:
-            app: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-eshead

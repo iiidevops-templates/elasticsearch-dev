@@ -13,7 +13,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-eshead
+    run: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-eshead
   ports:
     - name: es-tcp-9100
       protocol: TCP
