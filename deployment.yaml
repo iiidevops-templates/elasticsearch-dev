@@ -54,3 +54,13 @@ spec:
         envFrom:
           - configMapRef:
               name: "${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env"
+      initContainers:
+        - name: "import-data-${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-${CICD_GIT_COMMIT}"
+          image: elasticdump/elasticsearch-dump
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - >-
+              ls; ls ./data; pwd; elasticdump --input "csv://data/imports.csv" --output=http://${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-db-svc:9200/my_index --type=data --csvDelimiter ";"
