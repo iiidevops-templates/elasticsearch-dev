@@ -73,4 +73,3 @@ stages:
     branch:
       include:
       - master
-
