@@ -68,7 +68,7 @@ stages:
       PLUGIN_MTU: 1440
     runScriptConfig:
       image: elasticdump/elasticsearch-dump
-      shellScript: ls; pwd; elasticdump --input "csv:///data/imports.csv" --output=http://localhost:9200/my_index --type=data
+      shellScript: ls; ls ./data; pwd; elasticdump --input "csv://data/imports.csv" --output=http://localhost:9200/my_index --type=data
   when:
     branch:
       include:
