@@ -16,7 +16,7 @@ spec:
         iiidevops.org/project_name: ${CICD_GIT_REPO_NAME}
         iiidevops.org/branch: ${CICD_GIT_BRANCH}
         iiidevops.org/commit_id: ${CICD_GIT_COMMIT}
-        iiidevops.org/type: web-server
+        iiidevops.org/type: db-server
     spec:
       imagePullSecrets:
       - name: harbor-local    
@@ -42,3 +42,6 @@ spec:
         ports:
         - containerPort: 9100
           name: es-tcp-9100
+        envFrom:
+          - configMapRef:
+              name: "${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env"
