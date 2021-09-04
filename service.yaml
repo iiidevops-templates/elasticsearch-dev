@@ -9,7 +9,7 @@ metadata:
     iiidevops.org/project_name: ${CICD_GIT_REPO_NAME}
     iiidevops.org/branch: ${CICD_GIT_BRANCH}
     iiidevops.org/commit_id: ${CICD_GIT_COMMIT}
-    iiidevops.org/type: web-server
+    iiidevops.org/type: db-server
 spec:
   type: NodePort
   selector:
