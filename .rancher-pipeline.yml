@@ -66,6 +66,7 @@ stages:
   steps:
   - env:
       PLUGIN_MTU: 1440
+      namespace: ${CICD_GIT_REPO_NAME}
     runScriptConfig:
       image: elasticdump/elasticsearch-dump
       # Ref - https://github.com/elasticsearch-dump/elasticsearch-dump
