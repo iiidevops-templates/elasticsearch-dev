@@ -16,7 +16,7 @@ stages:
         ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env --from-env-file=iiidevops/app.env
         && rancher kubectl annotate configmap -n ${CICD_GIT_REPO_NAME} ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env
         iiidevops.org/project_name=${CICD_GIT_REPO_NAME} iiidevops.org/branch=${CICD_GIT_BRANCH}
-        iiidevops.org/commit_id=${CICD_GIT_COMMIT} iiidevops.org/type=appenv
+        iiidevops.org/commit_id=${CICD_GIT_COMMIT} iiidevops.org/type=appenv iiidevops.org/ip=10.20.0.96 iiidevops.org/port=32306
   when:
     branch:
       include:
@@ -75,11 +75,14 @@ stages:
   steps:
   - env:
       PLUGIN_MTU: 1440
+      namespace: ${CICD_GIT_REPO_NAME}
+    envFrom:
+      - configMapRef:
+          name: "${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env"
     runScriptConfig:
       image: elasticdump/elasticsearch-dump
       # Ref - https://github.com/elasticsearch-dump/elasticsearch-dump
-      shellScript: ls; ls ./data; pwd; elasticdump --input "csv://data/imports.csv" --output=http://${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-db-svc:9200/my_index --type=data --csvDelimiter ";"
-      targetNamespace: ${CICD_GIT_REPO_NAME}
+      shellScript: ls; ls ./data; pwd; elasticdump --input "csv://data/imports.csv" --output=http://${iiidevops.org/ip}:${iiidevops.org/port}/my_index --type=data --csvDelimiter ";"
   when:
     branch:
       include:
