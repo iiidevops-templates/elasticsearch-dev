@@ -69,19 +69,19 @@ stages:
   when:
     branch:
       include:
-      - master
+      - skip
 
 - name: Import--Initial-data
   steps:
   - env:
       PLUGIN_MTU: 1440
-      namespace: ${CICD_GIT_REPO_NAME}
     runScriptConfig:
       image: elasticdump/elasticsearch-dump
       # Ref - https://github.com/elasticsearch-dump/elasticsearch-dump
       shellScript: ls; ls ./data; pwd; elasticdump --input "csv://data/imports.csv" --output=http://${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-db-svc:9200/my_index --type=data --csvDelimiter ";"
+      targetNamespace: ${CICD_GIT_REPO_NAME}
   when:
     branch:
       include:
-      - skip
+      - master
 
