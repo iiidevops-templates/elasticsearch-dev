@@ -41,6 +41,8 @@ spec:
         env:
         - name: "discovery.type"
           value: "single-node"
+        - name: "bootstrap.memory_lock"
+          value: "true"
         - name: "http.cors.enabled"
           value: "true"
         - name: "http.cors.allow-origin"

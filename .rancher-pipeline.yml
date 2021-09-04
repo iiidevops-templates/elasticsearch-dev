@@ -39,3 +39,15 @@ stages:
     branch:
       include:
       - master
+
+- name: Import--Initial-data
+  steps:
+  - env:
+      PLUGIN_MTU: 1440
+    runScriptConfig:
+      image: elasticdump/elasticsearch-dump
+      shellScript: ls; pwd; elasticdump 
+  when:
+    branch:
+      include:
+      - master
