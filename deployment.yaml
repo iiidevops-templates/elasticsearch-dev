@@ -36,7 +36,7 @@ spec:
           - configMapRef:
               name: "${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env"
       containers:
-      - name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-esHead
+      - name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-eshead
         image: dtagdevsec/head:2006
         imagePullPolicy: Always
         ports:
