@@ -22,10 +22,17 @@ stages:
       include:
       - master
 
-- name: Deploy--ElasticSearch
+- name: Deploy--ElasticSearch-deployment
   steps:
   - applyYamlConfig:
       path: ./deployment.yaml
+  when:
+    branch:
+      include:
+      - master
+
+- name: Deploy--ElasticSearch-service
+  steps:
   - applyYamlConfig:
       path: ./service.yaml
   when:
