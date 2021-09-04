@@ -32,6 +32,10 @@ spec:
         env:
         - name: "discovery.type"
           value: "single-node"
+        - name: "http.cors.enabled"
+          value: "true"
+        - name: "http.cors.allow-origin"
+          value: "*"
         envFrom:
           - configMapRef:
               name: "${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env"

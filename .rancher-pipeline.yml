@@ -39,12 +39,3 @@ stages:
     branch:
       include:
       - master
-
-- name: Deploy--ElasticSearch-gui
-  steps:
-  - applyYamlConfig:
-      path: ./service-gui.yaml
-  when:
-    branch:
-      include:
-      - master
