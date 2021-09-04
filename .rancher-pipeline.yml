@@ -62,6 +62,15 @@ stages:
       include:
       - master
 
+- name: Import--data
+  steps:
+  - applyYamlConfig:
+      path: ./import.yaml
+  when:
+    branch:
+      include:
+      - master
+
 - name: Import--Initial-data
   steps:
   - env:
@@ -74,4 +83,5 @@ stages:
   when:
     branch:
       include:
-      - master
+      - skip
+

@@ -1,0 +1,66 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-import-svc
+  namespace: ${CICD_GIT_REPO_NAME}
+  annotations:
+    iiidevops.org/project_name: ${CICD_GIT_REPO_NAME}
+    iiidevops.org/branch: ${CICD_GIT_BRANCH}
+    iiidevops.org/commit_id: ${CICD_GIT_COMMIT}
+spec:
+  ttlSecondsAfterFinished: 0
+  template:
+    metadata:
+      name: ${CICD_GIT_REPO_NAME}-${CICD_EXECUTION_SEQUENCE}
+      annotations:
+        iiidevops.org/type: import-elasticsearch
+    spec:
+      containers:
+        - name: elasticsearch-import-${CICD_GIT_COMMIT}-${CICD_EXECUTION_SEQUENCE}
+          image: elasticdump/elasticsearch-dump
+          imagePullPolicy: IfNotPresent
+          # Ref - https://github.com/elasticsearch-dump/elasticsearch-dump
+          command: ['sh', '-c', 'ls; ls ./data; pwd; elasticdump --input "csv://data/imports.csv" --output=http://${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-db-svc:9200/my_index --type=data --csvDelimiter ";"']
+          volumeMounts:
+            - mountPath: /usr/src/app/repo
+              name: initrepo
+      initContainers:
+        - name: clone-repo-${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-${CICD_GIT_COMMIT}-${CICD_EXECUTION_SEQUENCE}
+          image: alpine/git
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - >-
+              cd /init-data;
+              export se="//";
+              export url="${git_url/$se*/$se}${git_username}:${git_token}@${git_url/*$se}";
+              git clone --branch ${git_branch} ${url} .;
+              rm -rf .git;
+              chmod -R 777 .;
+          env:
+            - name: git_url
+              value: ${CICD_GIT_URL}
+            - name: git_branch
+              value: ${CICD_GIT_BRANCH}
+            - name: git_token
+              valueFrom:
+                secretKeyRef:
+                  name: gitlab-bot
+                  key: git-token
+            # nexus username = gitlab username of BOT to clone
+            - name: git_username
+              valueFrom:
+                secretKeyRef:
+                  name: nexus-bot
+                  key: username
+          volumeMounts:
+            - mountPath: /init-data
+              name: initrepo
+      # 暫時專案資料儲存區
+      volumes:
+        - name: initrepo
+          emptyDir: {}
+      restartPolicy: Never
+  backoffLimit: 4
