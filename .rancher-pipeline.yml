@@ -62,3 +62,58 @@ stages:
       include:
       - master
 
+- name: Deploy--ElasticSearch-GUI
+  steps:
+  - applyYamlConfig:
+      path: ./k8s/deployment-head.yaml
+  when:
+    branch:
+      include:
+      - master
+
+- name: Deploy--ElasticSearch-GUI-service
+  steps:
+  - applyYamlConfig:
+      path: ./k8s/service-head.yaml
+  when:
+    branch:
+      include:
+      - master
+
+- name: Deploy--Wait ElasticSearch GUI deployment
+  steps:
+  - env:
+      deploy_name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-eshead
+      max_wait: 128
+      namespace: ${CICD_GIT_REPO_NAME}
+    envFrom:
+    - sourceKey: API_TOKEN
+      sourceName: pipeline-api-key
+      targetKey: rancher_api_token
+    - sourceKey: rancher-url
+      sourceName: rancher
+      targetKey: rancher_url
+    runScriptConfig:
+      image: iiiorg/deployment-waiter:0.0.2
+      shellScript: rancher login ${rancher_url} -t ${rancher_api_token} --skip-verify;
+        bash /app/run.sh
+  when:
+    branch:
+      include:
+      - master
+
+- name: Import--Initial-data
+  steps:
+  - env:
+      PLUGIN_MTU: 1440
+      namespace: ${CICD_GIT_REPO_NAME}
+    envFrom:
+    runScriptConfig:
+      image: elasticdump/elasticsearch-dump
+      # Ref - https://github.com/elasticsearch-dump/elasticsearch-dump
+      shellScript: ls; ls ./data; pwd; elasticdump --input "csv://data/imports.csv" --output=http://10.20.0.96:$32306/my_index --type=data --csvDelimiter ";"
+  when:
+    branch:
+      include:
+      - skip
+

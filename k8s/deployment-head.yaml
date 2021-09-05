@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-eshead
+  namespace: ${CICD_GIT_REPO_NAME}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-eshead
+  template:
+    metadata:
+      labels:
+        app: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-eshead
+      annotations:
+        iiidevops.org/project_name: ${CICD_GIT_REPO_NAME}
+        iiidevops.org/branch: ${CICD_GIT_BRANCH}
+        iiidevops.org/commit_id: ${CICD_GIT_COMMIT}
+        iiidevops.org/type: db-gui
+    spec:
+      imagePullSecrets:
+      - name: harbor-local
+      containers:
+      - name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-eshead
+        image: dtagdevsec/head:2006
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9100
+          name: es-tcp-9100
+        envFrom:
+          - configMapRef:
+              name: "${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env"
