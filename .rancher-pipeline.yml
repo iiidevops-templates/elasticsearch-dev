@@ -111,7 +111,7 @@ stages:
     runScriptConfig:
       image: elasticdump/elasticsearch-dump
       # Ref - https://github.com/elasticsearch-dump/elasticsearch-dump
-      shellScript: ls; ls ./data; pwd; elasticdump --input "csv://data/imports.csv" --output=http://10.20.0.96:$32306/my_index --type=data --csvDelimiter ";"
+      shellScript: ls; ls ./data; pwd; elasticdump --input "csv://data/imports.csv" --output=http://10.20.0.96:32306/my_index --type=data --csvDelimiter ";"
   when:
     branch:
       include:
