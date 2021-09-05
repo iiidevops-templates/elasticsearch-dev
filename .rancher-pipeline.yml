@@ -16,7 +16,7 @@ stages:
         ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env --from-env-file=iiidevops/app.env
         && rancher kubectl annotate configmap -n ${CICD_GIT_REPO_NAME} ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env
         iiidevops.org/project_name=${CICD_GIT_REPO_NAME} iiidevops.org/branch=${CICD_GIT_BRANCH}
-        iiidevops.org/commit_id=${CICD_GIT_COMMIT} iiidevops.org/type=appenv
+        iiidevops.org/commit_id=${CICD_GIT_COMMIT} iiidevops.org/type=appenv iiidevops.org/ip=10.20.0.96 iiidevops.org/port=32306
   when:
     branch:
       include:
