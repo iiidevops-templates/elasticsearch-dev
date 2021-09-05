@@ -25,20 +25,20 @@ stages:
 - name: Deploy--ElasticSearch
   steps:
   - applyYamlConfig:
-      path: ./deployment.yaml
+      path: ./k8s/deployment.yaml
   when:
     branch:
       include:
-      - master
+      - skip
 
 - name: Deploy--ElasticSearch-service
   steps:
   - applyYamlConfig:
-      path: ./service.yaml
+      path: ./k8s/service.yaml
   when:
     branch:
       include:
-      - master
+      - skip
 
 - name: Deploy--Wait ElasticSearch deployment
   steps:
@@ -60,12 +60,12 @@ stages:
   when:
     branch:
       include:
-      - master
+      - skip
 
 - name: Import--data
   steps:
   - applyYamlConfig:
-      path: ./import.yaml
+      path: ./k8s/import.yaml
   when:
     branch:
       include:
@@ -86,5 +86,5 @@ stages:
   when:
     branch:
       include:
-      - master
+      - skip
 
