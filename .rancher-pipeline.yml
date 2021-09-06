@@ -110,7 +110,7 @@ stages:
     envFrom:
     runScriptConfig:
       image: elasticdump/elasticsearch-dump
-      shellScript: ls; ls ./data; pwd; env; bash ./import.sh
+      shellScript: "ls; ls ./data; pwd; env; bash ./import.sh"
   when:
     branch:
       include:
