@@ -20,7 +20,7 @@ spec:
           image: elasticdump/elasticsearch-dump
           imagePullPolicy: IfNotPresent
           # Ref - https://github.com/elasticsearch-dump/elasticsearch-dump
-          command: ['sh', '-c', 'ls /mnt; ls /mnt/data; pwd; env; bash ./import.sh']
+          command: ['sh', '-c', 'ls /mnt; ls /mnt/data; pwd; env; bash /mnt/import.sh']
           volumeMounts:
             - mountPath: /mnt
               name: initrepo
@@ -63,4 +63,4 @@ spec:
         - name: initrepo
           emptyDir: {}
       restartPolicy: Never
-  backoffLimit: 4
+  backoffLimit: 3
