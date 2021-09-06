@@ -13,16 +13,16 @@ spec:
     metadata:
       name: ${CICD_GIT_REPO_NAME}-${CICD_EXECUTION_SEQUENCE}
       annotations:
-        iiidevops.org/type: import-elasticsearch
+        iiidevops.org/type: import-data
     spec:
       containers:
         - name: elasticsearch-import-${CICD_GIT_COMMIT}-${CICD_EXECUTION_SEQUENCE}
           image: elasticdump/elasticsearch-dump
           imagePullPolicy: IfNotPresent
           # Ref - https://github.com/elasticsearch-dump/elasticsearch-dump
-          command: ['sh', '-c', 'ls /mnt; ls /mnt/data; pwd; elasticdump --input "csv:///mnt/data/imports.csv" --output=http://${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-db-svc:9200/my_index --type=data --csvDelimiter ";"']
+          command: ['sh', '-c', 'ls /mnt; ls /mnt/data; pwd; env; bash ./import.sh']
           volumeMounts:
-            - mountPath: /usr/src/app/repo
+            - mountPath: /mnt
               name: initrepo
       initContainers:
         - name: clone-repo-${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-${CICD_GIT_COMMIT}-${CICD_EXECUTION_SEQUENCE}

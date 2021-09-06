@@ -114,3 +114,12 @@ stages:
     branch:
       include:
       - skip
+
+- name: Import--Initial-datax
+  steps:
+  - applyYamlConfig:
+      path: ./k8s/import.yaml
+  when:
+    branch:
+      include:
+      - master
