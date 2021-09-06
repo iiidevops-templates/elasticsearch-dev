@@ -13,10 +13,10 @@ spec:
       labels:
         app: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-eshead
       annotations:
-        iiidevops.org/project_name: ${CICD_GIT_REPO_NAME}
-        iiidevops.org/branch: ${CICD_GIT_BRANCH}
-        iiidevops.org/commit_id: ${CICD_GIT_COMMIT}
-        iiidevops.org/type: db-gui
+        iiidevops.org/project_name: "${CICD_GIT_REPO_NAME}"
+        iiidevops.org/branch: "${CICD_GIT_BRANCH}"
+        iiidevops.org/commit_id: "${CICD_GIT_COMMIT}"
+        iiidevops.org/type: "db-gui"
     spec:
       imagePullSecrets:
       - name: harbor-local
