@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-import-svc
+  name: ${CICD_GIT_REPO_NAME}-${CICD_EXECUTION_SEQUENCE}
   namespace: ${CICD_GIT_REPO_NAME}
   annotations:
     iiidevops.org/project_name: ${CICD_GIT_REPO_NAME}
