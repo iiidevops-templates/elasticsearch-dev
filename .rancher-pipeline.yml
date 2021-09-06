@@ -122,4 +122,4 @@ stages:
   when:
     branch:
       include:
-      - master
+      - skip
