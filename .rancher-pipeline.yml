@@ -108,6 +108,8 @@ stages:
       PLUGIN_MTU: 1440
       namespace: ${CICD_GIT_REPO_NAME}
     envFrom:
+      - configMapRef:
+          name: "${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env"
     runScriptConfig:
       image: elasticdump/elasticsearch-dump
       shellScript: "ls; ls ./data; pwd; env; bash ./import.sh"
@@ -115,4 +117,3 @@ stages:
     branch:
       include:
       - master
-
