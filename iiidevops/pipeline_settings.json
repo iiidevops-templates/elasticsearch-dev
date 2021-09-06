@@ -1,12 +1,6 @@
 {
   "name": "Elasticsearch (Dev)",
-  "description": "Elasticsearch 7.6 <a class='el-link el-link--primary' href='https://github.com/iiidevops-templates/elasticsearch-dev/blob/master/README.md' target='_blank'> 部署注意事項</a>",
+  "description": "Elasticsearch 7.6 <a class='el-link el-link--primary' href='https://github.com/iiidevops-templates/elasticsearch-dev/blob/master/README.md' target='_blank'> 部署注意事項與使用說明</a><hr size=1 /><b>v1.0.0</b><li>提供 Elastic Search Head 網頁管理工具<li>整合 Elasticdump 工具功能",
   "arguments": [
-    {
-      "key": "node.name",
-      "display": "Node Name",
-      "default_value": "Master",
-      "input_type": "text"
-    }
   ]
 }
