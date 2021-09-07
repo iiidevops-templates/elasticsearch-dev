@@ -9,6 +9,8 @@ metadata:
     iiidevops.org/commit_id: "${CICD_GIT_COMMIT}"
 spec:
   ttlSecondsAfterFinished: 0
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
   template:
     metadata:
       name: ${CICD_GIT_REPO_NAME}-${CICD_EXECUTION_SEQUENCE}
