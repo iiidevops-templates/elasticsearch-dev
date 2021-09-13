@@ -1,24 +1,21 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: ${CICD_GIT_REPO_NAME}-${CICD_EXECUTION_SEQUENCE}
+  name: ${CICD_GIT_REPO_NAME}-test
   namespace: ${CICD_GIT_REPO_NAME}
   annotations:
     iiidevops.org/project_name: "${CICD_GIT_REPO_NAME}"
     iiidevops.org/branch: "${CICD_GIT_BRANCH}"
     iiidevops.org/commit_id: "${CICD_GIT_COMMIT}"
 spec:
-  ttlSecondsAfterFinished: 0
-  successfulJobsHistoryLimit: 1
-  failedJobsHistoryLimit: 1
   template:
     metadata:
-      name: ${CICD_GIT_REPO_NAME}-${CICD_EXECUTION_SEQUENCE}
+      name: ${CICD_GIT_REPO_NAME}-test
       annotations:
         iiidevops.org/type: import-data
     spec:
       containers:
-        - name: elasticsearch-import-${CICD_GIT_COMMIT}-${CICD_EXECUTION_SEQUENCE}
+        - name: elasticsearch-import-${CICD_GIT_COMMIT}-test
           image: elasticdump/elasticsearch-dump
           imagePullPolicy: IfNotPresent
           # Ref - https://github.com/elasticsearch-dump/elasticsearch-dump
@@ -27,7 +24,7 @@ spec:
             - mountPath: /mnt
               name: initrepo
       initContainers:
-        - name: clone-repo-${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-${CICD_GIT_COMMIT}-${CICD_EXECUTION_SEQUENCE}
+        - name: clone-repo-${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-${CICD_GIT_COMMIT}-test
           image: alpine/git
           imagePullPolicy: IfNotPresent
           command:
