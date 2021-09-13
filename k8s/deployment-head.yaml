@@ -23,7 +23,7 @@ spec:
       containers:
       - name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-eshead
         image: dtagdevsec/head:2006
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9100
           name: es-tcp-9100
