@@ -8,7 +8,7 @@ metadata:
     iiidevops.org/branch: "${CICD_GIT_BRANCH}"
     iiidevops.org/commit_id: "${CICD_GIT_COMMIT}"
 spec:
-  ttlSecondsAfterFinished: 60
+  ttlSecondsAfterFinished: 86400
   template:
     metadata:
       name: ${CICD_GIT_REPO_NAME}-${CICD_EXECUTION_SEQUENCE}
