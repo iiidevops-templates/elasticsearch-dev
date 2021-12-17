@@ -1,4 +1,20 @@
 stages:
+- name: Integration--Issue and git messages
+  iiidevops: issue-git-hook
+  steps:
+  - envFrom:
+    - sourceKey: api-origin
+      sourceName: nexus
+      targetKey: api_origin
+    runScriptConfig:
+      image: iiiorg/rancher-cli:v2.4.6
+      shellScript: curl --location --request POST ${api_origin}/project/issues_commit_by_name
+        --form project_name=${CICD_GIT_REPO_NAME}
+  when:
+    branch:
+      include:
+      - master
+      - develop
 - name: Deploy--Set Environment variables
   iiidevops: deployed-environments
   steps:
