@@ -1,6 +1,6 @@
 stages:
-- name: Integration--Issue and git messages
-  iiidevops: issue-git-hook
+- name: Integration--plan and code
+  iiidevops: integration-plan-code
   steps:
   - envFrom:
     - sourceKey: api-origin
