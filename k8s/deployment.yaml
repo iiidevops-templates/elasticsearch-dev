@@ -19,7 +19,7 @@ spec:
         iiidevops.org/type: db-server
     spec:
       imagePullSecrets:
-      - name: harbor-local    
+      - name: harbor-local
       containers:
       - name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-es
         image: elasticsearch:7.16.1
