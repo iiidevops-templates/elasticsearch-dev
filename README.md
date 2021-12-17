@@ -1,6 +1,6 @@
 ## 部署開發用 Elasticsearch 
 :warning: 此部署僅為測試環境開發階段使用，為單節點配置，請勿部署至 Production 環境使用
-:information_source: 無配置資料永久儲存功能， 因此若專案 repo 有任何commit更動就會進行資料重置，請commit前一定要注意(因為無volume掛載，因此無法救回)。
+:information_source: 無配置資料永久儲存功能， 因此若專案 repo 有任何commit更動就會進行資料重置，請commit前一定要注意(因為無volume掛載，因此無法修復還原)。
 
 ## 使用說明
 
