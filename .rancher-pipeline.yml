@@ -10,12 +10,7 @@ stages:
       image: iiiorg/rancher-cli:v2.4.6
       shellScript: curl --location --request POST ${api_origin}/project/issues_commit_by_name
         --form project_name=${CICD_GIT_REPO_NAME}
-  when:
-    branch:
-      include:
-      - master
-      - develop
-- name: Deploy--Set Environment variables
+- name: Deploy--Set Web environment variables
   iiidevops: deployed-environments
   steps:
   - envFrom:
@@ -29,12 +24,12 @@ stages:
       image: iiiorg/rancher-cli:v2.4.6
       shellScript: rancher login ${rancher_url} -t ${rancher_api_token} --skip-verify
         && rancher kubectl delete configmap -n ${CICD_GIT_REPO_NAME} ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env
-        --ignore-not-found=true && rancher kubectl create configmap -n ${CICD_GIT_REPO_NAME}
-        ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env --from-env-file=iiidevops/app.env
-        && rancher kubectl annotate configmap -n ${CICD_GIT_REPO_NAME} ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env
-        iiidevops.org/project_name=${CICD_GIT_REPO_NAME} iiidevops.org/branch=${CICD_GIT_BRANCH}
-        iiidevops.org/commit_id=${CICD_GIT_COMMIT} iiidevops.org/type=appenv iiidevops.org/ip=10.20.0.96
-        iiidevops.org/port=32306
+        --ignore-not-found=true && perl iiidevops/bin/chk-app-env.pl && rancher kubectl
+        create configmap -n ${CICD_GIT_REPO_NAME} ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env
+        --from-env-file=iiidevops/app.env && rancher kubectl annotate configmap -n
+        ${CICD_GIT_REPO_NAME} ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env iiidevops.org/project_name=${CICD_GIT_REPO_NAME}
+        iiidevops.org/branch=${CICD_GIT_BRANCH} iiidevops.org/commit_id=${CICD_GIT_COMMIT}
+        iiidevops.org/type=appenv
   when:
     branch:
       include:
