@@ -122,7 +122,7 @@ stages:
     runScriptConfig:
       image: iiiorg/iiidevops-cli:0.0.1
       shellScript: rancher login ${rancher_url} -t ${rancher_api_token} --skip-verify;
-        bash /app/run.sh
+        deploy-wait.pl
   when:
     branch:
       include:
