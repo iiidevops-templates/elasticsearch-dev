@@ -22,7 +22,7 @@ spec:
       - name: harbor-local
       containers:
       - name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-eshead
-        image: dtagdevsec/head:2006
+        image: mobz/elasticsearch-head:5-alpine
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9100
