@@ -53,4 +53,4 @@ spec:
       volumes:
       - name: localtime
         hostPath:
-          path: /etc/localtime:ro
+          path: /etc/localtime
