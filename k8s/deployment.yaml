@@ -30,6 +30,8 @@ spec:
         - containerPort: 9300 #Java API port
           name: es-tcp-9300
         env:
+        - name: "TZ"
+          value: "Asia/Taipei"
         - name: "discovery.type"
           value: "single-node"
         - name: "bootstrap.memory_lock"

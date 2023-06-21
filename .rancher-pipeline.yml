@@ -86,46 +86,6 @@ stages:
     branch:
       include:
       - master
-- name: Deploy--ElasticSearch-GUI
-  iiidevops: deployed-environments
-  steps:
-  - applyYamlConfig:
-      path: ./k8s/deployment-head.yaml
-  when:
-    branch:
-      include:
-      - master
-- name: Deploy--ElasticSearch-GUI-service
-  iiidevops: deployed-environments
-  steps:
-  - applyYamlConfig:
-      path: ./k8s/service-head.yaml
-  when:
-    branch:
-      include:
-      - master
-- name: Deploy--Wait ElasticSearch GUI deployment
-  iiidevops: deployed-environments
-  steps:
-  - env:
-      deploy_name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-eshead
-      max_wait: 128
-      namespace: ${CICD_GIT_REPO_NAME}
-    envFrom:
-    - sourceKey: API_TOKEN
-      sourceName: pipeline-api-key
-      targetKey: rancher_api_token
-    - sourceKey: rancher-url
-      sourceName: rancher
-      targetKey: rancher_url
-    runScriptConfig:
-      image: iiiorg/iiidevops-cli:0.0.4
-      shellScript: rancher login ${rancher_url} -t ${rancher_api_token} --skip-verify;
-        deploy-wait.pl
-  when:
-    branch:
-      include:
-      - master
 - name: Import--Initial-data
   iiidevops: deployed-environments
   steps:
