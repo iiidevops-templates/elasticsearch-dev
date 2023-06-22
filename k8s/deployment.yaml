@@ -44,9 +44,6 @@ spec:
           value: "0"
         - name: "refresh_interval"
           value: "30s"
-        envFrom:
-          - configMapRef:
-              name: "${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-env"
         volumeMounts:
         - name: localtime
           mountPath: /etc/localtime
