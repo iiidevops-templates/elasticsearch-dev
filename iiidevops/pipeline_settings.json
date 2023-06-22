@@ -1,6 +1,6 @@
 {
   "name": "Elasticsearch 7.17",
-  "description": "Elasticsearch 7.17.10 <a class='el-link el-link--primary' href='https://github.com/iiidevops-templates/elasticsearch-dev/blob/master/README.md' target='_blank'> 部署注意事項與使用說明</a><hr size=1 /><li><b>v1.3.0</b>移除部署 GUI 介面, 升級 7.17.10, 設定時區 Asia/Taipei<li><b>v1.2.0</b>升級 elastic search 至 7.17.1<li><b>v1.1.0</b>因應 Log4j 資安議題，升級 elastic search 至 7.16.1",
+  "description": "Elasticsearch 7.17.10 <a class='el-link el-link--primary' href='https://github.com/iiidevops-templates/elasticsearch-dev/blob/master/README.md' target='_blank'> 部署注意事項與使用說明</a><hr size=1 /><li><b>v1.3.0</b>移除部署 GUI 介面, 升級 7.17.10, 設定與主機相同時區<li><b>v1.2.0</b>升級 elastic search 至 7.17.1<li><b>v1.1.0</b>因應 Log4j 資安議題，升級 elastic search 至 7.16.1",
   "arguments": [
   ]
 }
